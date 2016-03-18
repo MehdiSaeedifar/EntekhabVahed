@@ -1,0 +1,247 @@
+﻿html {
+    background: url(shattered.png) repeat;
+}
+body {
+    font-family: 'iranian_sansregular';
+    font-size: 12px;
+    background: transparent;
+}
+
+.wrapper {
+    background-color: #fff;
+    padding: 30px;
+}
+
+table th {
+    text-align: center;
+}
+
+table td {
+    text-align: center;
+}
+
+.table tbody > tr > td.vert-align {
+    /*vertical-align: middle !important;*/
+}
+
+.dropdown-menu {
+    /*float: right !important;*/
+    /*position: inherit !important;*/
+    /*top: 0 !important;*/
+    /*left: 15px !important;*/
+    /*right: 0;*/
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+@font-face {
+    font-family: 'iranian_sansregular';
+    src: url('Fonts/irsans.eot');
+    src: url('Fonts/irsans.eot?#iefix') format('embedded-opentype'), url('Fonts/irsans.woff2') format('woff2'), url('Fonts/irsans.woff') format('woff'), url('Fonts/irsans.ttf') format('truetype'), url('Fonts/irsans.svg#iranian_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+input[type=number] {
+    text-align: center;
+    direction: ltr;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+/*input.ng-dirty.ng-invalid {
+    border: 1px solid #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -ms-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+    input.ng-dirty.ng-invalid:focus {
+        border-color: #843534;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 6px #ce8483;
+    }
+
+div.ng-dirty.ng-valid, input.ng-dirty.ng-valid {
+    border-color: #3c763d !important;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -ms-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+}
+
+    input.ng-dirty.ng-valid:focus {
+        border-color: #2b542c;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168;
+    }*/
+
+.form-group.focus .form-control, .form-control:focus, .form-group.focus .select2-search input[type=text], .select2-search input[type=text]:focus {
+    border-color: #66afe9;
+}
+
+
+input.ng-dirty.ng-invalid {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+    input.ng-dirty.ng-invalid:focus {
+        border-color: #e74c3c;
+    }
+
+div.ng-dirty.ng-valid, input.ng-dirty.ng-valid {
+    border-color: #2ecc71 !important;
+    /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -ms-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);*/
+}
+
+    input.ng-dirty.ng-valid:focus {
+        border-color: #2ecc71;
+        /*box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #67b168;*/
+    }
+
+    /*input.ng-pristine.ng-valid.ng-valid-required {
+         border-color: #2ecc71 !important;
+    }
+    input.ng-pristine.ng-valid.ng-valid-required:focus {
+        border-color: #2ecc71 !important;
+    }*/
+
+div.input-times input[type=number] {
+    padding: 0;
+    display: inline-block;
+}
+
+
+button span {
+    font-size: 16px;
+}
+
+/*.navbar-site {
+    background-color: #434A54;
+    border-color: #4FC1E9;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+}
+.navbar-default .navbar-text, .navbar-default .navbar-nav > li > a {
+    color: #4FC1E9;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-link, .navbar-default .btn-link {
+    color: #4A89DC;
+}*/
+
+input {
+    
+}
+
+.form-control input {
+    font-family: "iranian_sansregular" !important;
+}
+
+ul[typeahead-popup] {
+    background-color: #34495e;
+    color: white;
+}
+
+.tab-content {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar {
+    margin-bottom: 5px;
+    border-radius: 0;
+}
+
+.date-btn-action {
+    padding: 4px 3px 2px 3px;
+}
+.form-group-sm select.form-control {
+    height: 35px;
+}
+
+.tbl-schedule table tr td {
+    vertical-align: middle;
+}
+
+.nav-tabs > li > a {
+    font-size: 14px;
+}
+
+
+
+.animate-enter { 
+    -webkit-animation: enter 600ms cubic-bezier(0.470, 0.000, 0.745, 0.715);
+    animation: enter 600ms cubic-bezier(0.470, 0.000, 0.745, 0.715);
+    display: block;
+    position: relative;
+} 
+@-webkit-keyframes enter {
+    from {
+        opacity: 0;
+        height: 0px;
+        right: -70px;
+    }
+    75% {
+        right: 15px;
+    }
+    to {
+        opacity: 1;
+        height: 30px;
+        right: 0px;
+    }
+}
+@keyframes enter {
+    from {
+        opacity: 0;
+        height: 0px;
+        right: -70px;
+    }
+    75% {
+        right: 15px;
+    }
+    to {
+        opacity: 1;
+        height: 30px;
+        right: 0px;
+    }
+}
+ 
+.animate-repeat {
+  line-height:40px;
+  list-style:none;
+  box-sizing:border-box;
+}
+
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter,
+.animate-repeat.ng-leave {
+  transition:all linear 0.5s;
+}
+
+.animate-repeat.ng-leave.ng-leave-active,
+.animate-repeat.ng-move,
+.animate-repeat.ng-enter {
+  opacity:0;
+  max-height:0;
+}
+
+.animate-repeat.ng-leave,
+.animate-repeat.ng-move.ng-move-active,
+.animate-repeat.ng-enter.ng-enter-active {
+  opacity:1;
+  max-height:40px;
+}
+
+.system-info ul {
+    font-size: 12px;
+}

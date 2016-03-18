@@ -1,0 +1,295 @@
+﻿@{
+    ViewBag.Title = "صفحه اصلی";
+}
+<form name="frmListUnits" class="form-group-sm" novalidate unsaved-warning-form>
+    <tabset>
+        <tab active="tabs[0].isActive">
+            <tab-heading>
+                فهرست واحد‌های درسی
+            </tab-heading>
+            <div class="row">
+                <div class="col-md-12 system-info">
+                    <div class="alert alert-info">
+                        <ul>
+                            <li>این سامانه نسخه آزمایشی است.</li>
+                            <li>در وارد کردن کد درس دقت کنید و کد تکراری وارد ننمایید.</li>
+                            <li>با مراجعه به تب تنظیمات می توانید سقف تعداد واحدها را تنظیم کنید.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-striped table-hover table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>ردیف</th>
+                                        <th>کد درس</th>
+                                        <th>نام درس</th>
+                                        <th>نام استاد</th>
+                                        <th>تعداد واحد</th>
+                                        <th>نوع واحد</th>
+                                        <th style="width: 400px;">ساعت تشکیل کلاس</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="animate-repeat" ng-form name="frmAddUnit" ng-repeat="unit in lstUnits">
+                                        <td>{{$index+1}}</td>
+                                        <td>
+                                            <input style="min-width: 80px;" class="form-control" type="number" name="unitId" ng-model="unit.id" ng-required="true" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" />
+                                        </td>
+                                        <td>
+                                            <input style="min-width: 150px;" type="text" name="courseName" ng-model="unit.courseName" typeahead="courseName for courseName in lstCoursesName | filter:$viewValue | limitTo:8" typeahead-append-to-body="true" class="form-control typeahead" ng-required="true" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 400, 'blur': 0 } }">
+                                        </td>
+                                        <td>
+                                            <input style="min-width: 150px;" type="text" name="teacherName" ng-model="unit.teacherName" typeahead="teacherName for teacherName in lstTeachersNames | filter:$viewValue | limitTo:8" typeahead-append-to-body="true" class="form-control typeahead" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 400, 'blur': 0 } }">
+                                        </td>
+                                        <td>
+                                            <input style="width: 40px;" class="form-control" type="number" name="unitNumber" ng-model="unit.unitNumber" ng-required="true" min="1" max="9" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" />
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <div class="radio" style="width: 115px;">
+                                                <label>
+                                                    <input type="radio" ng-model="unit.unitType" value="Specialized" ng-required="!unit.unitType">تخصصی
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" ng-model="unit.unitType" value="General" ng-required="!unit.unitType">
+                                                </label>عمومی
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" ng-model="unit.unitType" value="Lab" ng-required="!unit.unitType">
+                                                </label>آزمایشگاه
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div ng-form name="frmClassDateTimes" class="row animate-repeat" style="width: 390px; margin-bottom: 10px;" ng-repeat="classDate in unit.classDateTimes">
+                                                <div class="col-md-6 col-xs-6">
+                                                    <label class="control-label pull-right">روز</label>
+                                                    <div class="col-md-10">
+                                                        <select class="form-control" ng-model="classDate.day" name="dayOfWeek" ng-required="true">
+                                                            <option value="1">شنبه</option>
+                                                            <option value="2">یکشنبه</option>
+                                                            <option value="3">دوشنبه</option>
+                                                            <option value="4">سه شنبه</option>
+                                                            <option value="5">چهارشنبه</option>
+                                                            <option value="6">پنج شنبه</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-xs-6">
+                                                    <div class="row input-times">
+                                                        <div class="col-md-12 col-xs-6" style="margin-bottom: 5px;">
+                                                            <label style="width: 50px;" class="control-label pull-right">شروع:</label>
+                                                            <input ng-required="true" style="width: 50px;" class="form-control" type="number" name="startTimeMinute" placeholder="دقیقه" ng-model="classDate.startTimeMinute" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" min="0" max="59" /> :
+                                                            <input ng-required="true" class="form-control" style="width: 50px;" type="number" name="startTimeHour" placeholder="ساعت" ng-model="classDate.startTimeHour" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" min="7" max="18" />
+                                                        </div>
+                                                        <div class="col-md-12 col-xs-6">
+                                                            <label style="width: 50px;" class="control-label pull-right">پایان:</label>
+                                                            <input ng-required="true" class="form-control" style="width: 50px;" type="number" name="endTimeMinute" placeholder="دقیقه" ng-model="classDate.endTimeMinute" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" min="0" max="59" /> :
+                                                            <input ng-required="true" class="form-control" style="width: 50px;" type="number" name="endTimeHour" placeholder="ساعت" ng-model="classDate.endTimeHour" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" min="7" max="18" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <button ng-disabled="frmClassDateTimes.$invalid" type="button" class="btn btn-info btn-sm pull-right date-btn-action" ng-click="addDateTime($index, unit.classDateTimes, classDate)" style="margin-left: 5px;">
+                                                        <span class="glyphicon glyphicon-plus"></span>
+                                                    </button>
+                                                    <button ng-show="unit.classDateTimes.length > 1" type="button" class="btn btn-danger btn-sm pull-right date-btn-action" ng-click="removeDateTime($index, unit.classDateTimes, classDate)">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            <div>
+                                                <button class="btn btn-primary btn-sm" style="margin-bottom: 10px;" type="button" ng-click="add($index,unit)" ng-disabled="frmAddUnit.$invalid || frmClassDateTimes.$invalid">
+                                                    <span class="glyphicon glyphicon-copy"></span>  کپی اطلاعات
+                                                </button>
+                                                <button type="button" class="btn btn-danger btn-sm" ng-click="removeUnit(unit)">
+                                                    <span class="glyphicon glyphicon-remove"></span>   حذف
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="btn btn-success" style="margin-bottom: 10px;" type="button" ng-click="addEmptyUnit()" ng-disabled="frmListUnits.$invalid">
+                            <span class="glyphicon glyphicon-plus"></span>   افزودن واحد جدید
+                        </button>
+
+                    </div>
+
+                </div>
+            </div>
+        </tab>
+        <tab active="tabs[1].isActive">
+            <tab-heading>
+                تنظیمات
+            </tab-heading>
+
+            <fieldset>
+                <legend>
+                    تنظیمات اجباری
+                </legend>
+                <div class="row form-group-sm">
+                    <div class="form-group col-md-4">
+                        <label for="exampleInputEmail2" class="col-md-6">حداقل تعداد واحد</label>
+                        <input type="number" style="width: 80px;" class="form-control" id="exampleInputEmail2" placeholder="" ng-required="true" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" ng-model="unitConfig.minUnitNumber">
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="exampleInputName2" class="col-md-6">حداکثر تعداد واحد</label>
+                        <input type="number" style="width: 80px;" class="form-control" id="exampleInputName2" placeholder="" ng-required="true" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" ng-model="unitConfig.maxUnitNumber">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-5">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" ng-model="options.saveData">
+                                ذخیره اطلاعات در مرورگر برای مراجعات بعدی
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    تنظیمات اختیاری
+                </legend>
+                <div class="form-inline form-group-sm">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputName2" class="col-md-5">حداقل تعداد واحد تخصصی</label>
+                            <input type="number" style="width: 80px;" class="form-control" id="exampleInputName2" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" ng-model="unitConfig.minEspUnitNumber">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail2" class="col-md-5">حداکثر تعداد واحد تخصصی</label>
+                            <input type="number" style="width: 80px;" class="form-control" id="exampleInputEmail2" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" ng-model="unitConfig.maxEspUnitNumber">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputName2" class="col-md-5">حداقل تعداد واحد عمومی</label>
+                            <input type="number" style="width: 80px;" class="form-control" id="exampleInputName2" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" ng-model="unitConfig.minGeneralUnitNumber">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail2" class="col-md-5">حداکثر تعداد واحد عمومی</label>
+                            <input type="number" style="width: 80px;" class="form-control" id="exampleInputEmail2" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" ng-model="unitConfig.maxGeneralUnitNumber">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputName2" class="col-md-5">حداقل تعداد واحد آزمایشگاهی</label>
+                            <input type="number" style="width: 80px;" class="form-control" id="exampleInputName2" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" ng-model="unitConfig.minLabUnitNumber">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputEmail2" class="col-md-5">حداکثر تعداد واحد آزمایشگاهی</label>
+                            <input type="number" style="width: 80px;" class="form-control" id="exampleInputEmail2" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 1000, 'blur': 0 } }" ng-model="unitConfig.maxLabUnitNumber">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="text-center" style="margin-top: 20px;">
+                <div style="margin-bottom: 10px;" ng-click="removeData()"><button class="btn btn-danger">حذف اطلاعات وارد شده</button></div>
+                <div><button class="btn btn-danger" ng-click="removeHistory()">حذف تاریخچه اطلاعات وارد شده در مرورگر</button></div>
+            </div>
+        </tab>
+        <tab active="tabs[2].isActive">
+            <tab-heading>
+                برنامه هفتگی
+            </tab-heading>
+            <div class="tbl-schedule" style="margin-bottom: 25px; border-bottom: 1px dotted #ebebeb;" ng-repeat="table in unitTables">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-condensed">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th ng-repeat="column in table.columns">{{column}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in table.rows">
+                                <td>{{row.day}}</td>
+                                <td ng-repeat="course in row.units track by $index">
+                                    <div style="font-weight: bold" class="">{{course.courseName}}</div>
+                                    <div>{{course.teacherName}}</div>
+                                    <div>{{course.id}}</div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col-md-3">
+                        تعداد کل: {{table.unitsNumber}}
+                    </div>
+                    <div class="col-md-3">
+                        واحد تخصصی: {{table.specializedUnitsNumber}}
+                    </div>
+                    <div class="col-md-3">
+                        واحد عمومی: {{table.generalUnitsNumber}}
+                    </div>
+                    <div class="col-md-3">
+                        واحد آزمایشگاهی: {{table.labUnitsNumber}}
+                    </div>
+                </div>
+            </div>
+        </tab>
+    </tabset>
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-md-12 text-center">
+            <button type="button" style="width: 80%;" class="btn btn-primary btn-lg" ng-disabled="frmListUnits.$invalid || submitButton.isDisable" ng-click="submitLstUnits()">
+                <span class="glyphicon glyphicon-calendar"></span> {{submitButton.text}}
+            </button>
+        </div>
+    </div>
+</form>
+<script type="text/ng-template" id="removeData.html">
+    <div class="modal-header">
+        <h3 class="modal-title">هشدار!</h3>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-danger">
+            <p>آیا از حذف اطلاعات وارد شده مطمئن هستید؟</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" type="button" ng-click="ok()">بله</button>
+        <button class="btn btn-info" type="button" ng-click="cancel()">نه</button>
+    </div>
+</script>
+<script type="text/ng-template" id="clearHistory.html">
+    <div class="modal-header">
+        <h3 class="modal-title">هشدار!</h3>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-danger">
+            <p>آیا از حذف تاریخچه واحدهای انتخاب شده مطمئن هستید؟</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-danger" type="button" ng-click="ok()">بله</button>
+        <button class="btn btn-info" type="button" ng-click="cancel()">نه</button>
+    </div>
+</script>
+<script type="text/ng-template" id="message.html">
+    <div class="modal-header">
+        <h3 class="modal-title">پیام سیستم!</h3>
+    </div>
+    <div class="modal-body">
+        <div class="alert alert-info">
+            <p>متاسفانه با توجه به واحدهای وارد شده و تنظیمات انجام شده نتوانستیم برنامه‌ای تنظیم کنیم.</p>
+            <p>پیشنهاد می کنیم یک بار واحدهای وارد شده را بررسی کنید و تنظیمات انجام شده در تب تنظیمات را بازنگری کنید.</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-info" type="button" ng-click="cancel()">باشه</button>
+    </div>
+</script>
